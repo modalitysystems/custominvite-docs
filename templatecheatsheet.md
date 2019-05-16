@@ -3,7 +3,7 @@
 ### Adding Images
 Although images embedded in HTML can be blocked by Outlook when recieved it is fine to embed images when creating an email.  Outlook will ensure that the inline embedded images is replaced with a more reliable format when the meeting invitation is sent.
 
-### Steps
+#### Steps
 1. Use an online embedding tool such as https://codebeautify.org/image-to-base64-converter to create an ````<img>```` tag with 64bit encoded image data in it.
 1. Provide a suitable alt element value.
 
