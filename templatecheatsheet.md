@@ -30,9 +30,34 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
 }
 ````
 
+### Display SFBS PSTN Numbers for the selected region
+Ensure that ````Model.Sfbs.DialInNumbers```` references include a ````Where(p=> p.IsDefault)````
+````
+ @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.IsDefault ))
+   {
+      item.Number
+      item.Region
+      item.IsTollFree
+      Model.Sfbs.ConferenceId
+   }
+ ````
+ 
+### Display all SFBS PSTN Numbers regardless of selected region
+Simply exclude the ````Where()```` clause on ````Model.Sfbs.DialInNumbers````
+````
+  @foreach(var item in Model.Sfbs.DialInNumbers)
+   {
+      item.Number
+      item.Region
+      item.IsTollFree
+      Model.Sfbs.ConferenceId
+   }
+````
+
 ### Show SfBS PSTN Numbers for a specified region
 ````
- @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.Region.Equals("India",StringComparison.InvariantCultureIgnoreCase)))
+ @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.IsDefault  &&
+   p.Region.Equals("India",StringComparison.InvariantCultureIgnoreCase)))
  {
     item.Number
     item.Region
@@ -42,9 +67,10 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
 ````
 
 ### Show SfBS PSTN Numbers for multiple specified regions
-The following example displays dial in numbers for UK, US and Germany
+The following example displays dial in numbers for UK, US and Germany for the selected dial plan
 ````
- @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.Region.Equals("UK",StringComparison.InvariantCultureIgnoreCase) ||
+ @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.IsDefault  &&  
+   p.Region.Equals("UK",StringComparison.InvariantCultureIgnoreCase) ||
    p.Region.Equals("US",StringComparison.InvariantCultureIgnoreCase)  || 
    p.Region.Equals("Germany",StringComparison.InvariantCultureIgnoreCase)))
  {
@@ -55,7 +81,18 @@ The following example displays dial in numbers for UK, US and Germany
  }
 ````
 
-### Show PSTN Numbers according to user region
+### Show SfBS Toll Free numbers only
+````
+@foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.IsDefault && p.IsTollFree))
+{
+   item.Number
+   item.Region
+   item.IsTollFree
+   Model.Sfbs.ConferenceId
+}
+````
+
+### Format according to user current culture
 1. Add ````@using System.Globalization```` to the top of the template
 2. Add the following comparison against the current culture using the ISO 639-2 codes documented at https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
 
@@ -76,3 +113,5 @@ The following example displays dial in numbers for UK, US and Germany
    <a href="@Model.Teams.Pexip.DialingInstructionsUrl">Alternate VTC dialing instructions</a>
 }
 ````
+
+
