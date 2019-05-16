@@ -30,7 +30,30 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
 }
 ````
 
-### Display available VTC details
+### Show PSTN Numbers for a spefified region
+````
+ @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.Region.Equals("India",StringComparison.InvariantCultureIgnoreCase)))
+ {
+    item.Number
+    item.Region
+    item.IsTollFree
+    Model.Sfbs.ConferenceId
+ }
+````
+
+### Show PSTN Numbers according to user region
+1. Add ````@using System.Globalization```` to the top of the template
+2. Add the following comparison against the current culture using the ISO 639-2 codes documented at https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
+
+````
+@if(CultureInfo.CurrentCulture.ThreeLetterISOLanguageName.Equals("Ita",StringComparison.InvariantCultureIgnoreCase ))
+{
+   ...Code if current culture is Italy
+}
+````
+
+
+### Show available VTC details
 ````
 @if(Model.Teams.Pexip.IsEnabled)
 {
