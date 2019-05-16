@@ -18,10 +18,7 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
    <h3>Join by phone</h3>
    @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.IsDefault ))
    {
-      item.Number
-      item.Region
-      item.IsTollFree
-      Model.Sfbs.ConferenceId
+     \\stuff ...
    }
 }
 @if(Model.Sfbs.IsPstnEnabled == false)
@@ -31,7 +28,7 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
 ````
 
 ### Display SFBS PSTN Numbers for the selected region
-Ensure that ````Model.Sfbs.DialInNumbers```` references include a ````Where(p=> p.IsDefault)````
+Ensure that ````Model.Sfbs.DialInNumbers```` references include a ````Where(p=> p.IsDefault)```` clause
 ````
  @foreach(var item in Model.Sfbs.DialInNumbers.Where(p => p.IsDefault ))
    {
@@ -43,7 +40,7 @@ Ensure that ````Model.Sfbs.DialInNumbers```` references include a ````Where(p=> 
  ````
  
 ### Display all SFBS PSTN Numbers regardless of selected region
-Simply exclude the ````Where()```` clause on ````Model.Sfbs.DialInNumbers````
+Simply exclude the ````Where(p=> p.IsDefault)```` clause on ````Model.Sfbs.DialInNumbers````
 ````
   @foreach(var item in Model.Sfbs.DialInNumbers)
    {
