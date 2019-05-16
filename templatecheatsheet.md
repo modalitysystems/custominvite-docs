@@ -27,10 +27,12 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
 }
 ````
 
-### Is Teams VTC enabled
+### Display available VTC details
 ````
 @if(Model.Teams.Pexip.IsEnabled)
 {
-   ..template code for enabled Teams VTC
+    VTC Conference ID: @Model.Teams.Pexip.ConferenceId
+   @Model.Teams.Pexip.SipAddress
+   <a href="@Model.Teams.Pexip.DialingInstructionsUrl">Alternate VTC dialing instructions</a>
 }
 ````
