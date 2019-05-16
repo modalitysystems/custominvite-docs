@@ -12,14 +12,14 @@ Although images embedded in HTML can be blocked by Outlook when recieved it is f
 ````
 
 ### Is SfB PSTN Conferencing Enabled
-1. to test if PSTN Conferencing is enabled
+* To test if PSTN Conferencing is enabled
 ````
 @if(Model.Sfbs.IsPstnEnabled)
 {
    ...template code for enabled PSTN Conferencing
 }
 ````
-2. To test if PSTN Conferencing is not enabled
+* To test if PSTN Conferencing is not enabled
 ````
 @if(Model.Sfbs.IsPstnEnabled == false)
 {
